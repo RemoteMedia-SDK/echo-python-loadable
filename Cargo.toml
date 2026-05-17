@@ -21,7 +21,7 @@ crate-type = ["cdylib", "rlib"]
 [dependencies]
 # The `python-plugin` feature pulls in include_dir, py-env-manager,
 # dirs, sha2, hex. Default-feature plugin-sdk doesn't carry them.
-remotemedia-plugin-sdk = { git = "https://github.com/matbeedotcom/remotemedia-sdk.git", rev = "a1f365e40a598645655cb5269b09c60096a24f43", features = ["python-plugin"] }
+remotemedia-plugin-sdk = { git = "https://github.com/matbeedotcom/remotemedia-sdk.git", rev = "5199519cb8b14e739db48ff978738fe17775b2d3", features = ["python-plugin"] }
 
 # `abi_stable` must be a direct dep so the attribute macros expanded
 # by `plugin_export!()` (`#[sabi_extern_fn]`, `#[export_root_module]`)

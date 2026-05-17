@@ -24,7 +24,7 @@
 
 [plugin]
 name        = "echo-python-loadable"
-version     = "0.2.0"
+version     = "0.2.1"
 language    = "rust"
 description = "Echo node shipped as Path 4 cdylib (embedded Python via include_dir!) — smallest end-to-end Python-plugin proof"
 
