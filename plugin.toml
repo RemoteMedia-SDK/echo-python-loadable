@@ -1,0 +1,33 @@
+# Echo plugin shipped as a Rust cdylib that embeds Python source via
+# `include_dir!` (Path 4 — `python_plugin_export!` macro). Smallest
+# possible Python-plugin proof point: no ML deps, single file, just
+# round-trips text.
+#
+# A consumer references this from a manifest as either:
+#
+#   "plugins": ["echo-python-loadable@v0.1.0"]
+#       (canonical-org shorthand → github.com/RemoteMedia-SDK/echo-python-loadable)
+#
+#   "plugins": ["./plugins/libecho_python_loadable_plugin.so"]
+#       (local path — for development before the release flow exists)
+#
+# The resolver fetches this file from raw.githubusercontent.com first
+# (cheap, validates the spec + lists node types). Because language="rust"
+# the resolver then falls through to `release-manifest.json` for the
+# actual platform-specific cdylib — NOT to source-load. The Python
+# inside is an implementation detail of the cdylib, opaque to the
+# resolver's dispatch.
+#
+# For the no-Rust equivalent (source-load via plugin.toml + .py with
+# language="python") see `examples/python-source-plugin/` →
+# `RemoteMedia-SDK/echo-python-source`.
+
+[plugin]
+name        = "echo-python-loadable"
+version     = "0.1.0"
+language    = "rust"
+description = "Echo node shipped as Path 4 cdylib (embedded Python via include_dir!) — smallest end-to-end Python-plugin proof"
+
+[rust]
+node_types    = ["EchoPythonNode"]
+asset_pattern = "lib{name}-{arch}-{os}.{ext}"
