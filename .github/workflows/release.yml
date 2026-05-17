@@ -1,0 +1,20 @@
+name: Release
+
+on:
+  push:
+    tags: ['v*']
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Tag to release (e.g. v0.2.0). Must already exist or be created by this dispatch.'
+        required: true
+
+jobs:
+  release:
+    uses: matbeedotcom/remotemedia-sdk/.github/workflows/build-plugin.yml@add-reusable-plugin-build-workflow
+    with:
+      crate-name:   echo-python-loadable-plugin
+      display-name: echo-python-loadable
+      tag:          ${{ inputs.tag || github.ref_name }}
+    permissions:
+      contents: write
